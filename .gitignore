@@ -1,0 +1,10 @@
+# macOS
+.DS_Store
+
+# Raw/original source photos (the site uses the optimized images/ folder)
+photo_*.jpeg
+
+# Editor / temp
+*.log
+.vscode/
+.idea/
