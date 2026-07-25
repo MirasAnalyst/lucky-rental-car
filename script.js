@@ -46,7 +46,7 @@ const FLEET = [
 /* ---- Translations ---- */
 const I18N = {
   en: {
-    "top.address":"Zurab Shartava St. 16, Batumi 6000",
+    "top.address":"Zhiuli Shartava St. 16, Batumi 6010",
     "top.hours":"Open 24/7 — Support around the clock",
     "top.pay":"We accept USD · EUR · GEL · USDT",
     "nav.fleet":"Fleet","nav.why":"Why Us","nav.terms":"Terms","nav.travel":"Travel","nav.gallery":"Gallery","nav.contact":"Contact","nav.book":"Book Now",
@@ -106,16 +106,17 @@ const I18N = {
     "about.cta":"Book your car",
     "contact.kicker":"Get in touch","contact.h":"Book in one message","contact.p":"Pick your favourite app and message us — we usually reply within minutes, 24/7.",
     "contact.fb":"Follow us on Facebook",
-    "info.loc":"Location","info.loc.v":"Zurab Shartava St. 16<br />Batumi 6000, Georgia 🇬🇪",
+    "info.loc":"Location","info.loc.v":"Zhiuli Shartava St. 16<br />Batumi 6010, Georgia 🇬🇪",
     "info.hours":"Hours","info.hours.v":"Open 24 hours<br />7 days a week",
     "info.terms":"Rental terms","info.terms.v":"Driver from 21 years<br />Licence from 2 years",
     "info.pay":"Payment","info.pay.v":"USD · EUR · GEL · USDT<br />No card deposit",
+    "map.directions":"Get directions",
     "foot.about":"Premium car rental in Batumi, Georgia. No deposit · Full CASCO · Free delivery · 24/7 support.",
-    "foot.explore":"Explore","foot.contact":"Contact","foot.visit":"Visit","foot.visit.v":"Zurab Shartava 16<br />Batumi 6000, Georgia",
+    "foot.explore":"Explore","foot.contact":"Contact","foot.visit":"Visit","foot.visit.v":"Zhiuli Shartava 16<br />Batumi 6010, Georgia",
     "foot.made":"Made with ☘ on the Black Sea coast"
   },
   ru: {
-    "top.address":"ул. Зураба Шартава 16, Батуми 6000",
+    "top.address":"ул. Жиули Шартава 16, Батуми 6010",
     "top.hours":"Работаем 24/7 — Поддержка круглосуточно",
     "top.pay":"Принимаем USD · EUR · GEL · USDT",
     "nav.fleet":"Автопарк","nav.why":"Преимущества","nav.terms":"Условия","nav.travel":"Куда поехать","nav.gallery":"Галерея","nav.contact":"Контакты","nav.book":"Забронировать",
@@ -175,12 +176,13 @@ const I18N = {
     "about.cta":"Забронировать авто",
     "contact.kicker":"Связаться с нами","contact.h":"Бронируйте в одно сообщение","contact.p":"Выберите удобное приложение и напишите нам — обычно отвечаем за пару минут, 24/7.",
     "contact.fb":"Мы в Facebook",
-    "info.loc":"Адрес","info.loc.v":"ул. Зураба Шартава 16<br />Батуми 6000, Грузия 🇬🇪",
+    "info.loc":"Адрес","info.loc.v":"ул. Жиули Шартава 16<br />Батуми 6010, Грузия 🇬🇪",
     "info.hours":"Часы работы","info.hours.v":"Круглосуточно<br />7 дней в неделю",
     "info.terms":"Условия аренды","info.terms.v":"Водитель от 21 года<br />Стаж от 2 лет",
     "info.pay":"Оплата","info.pay.v":"USD · EUR · GEL · USDT<br />Без залога на карте",
+    "map.directions":"Построить маршрут",
     "foot.about":"Премиум-аренда авто в Батуми, Грузия. Без залога · Полное КАСКО · Бесплатная доставка · Поддержка 24/7.",
-    "foot.explore":"Разделы","foot.contact":"Контакты","foot.visit":"Адрес","foot.visit.v":"ул. Зураба Шартава 16<br />Батуми 6000, Грузия",
+    "foot.explore":"Разделы","foot.contact":"Контакты","foot.visit":"Адрес","foot.visit.v":"ул. Жиули Шартава 16<br />Батуми 6010, Грузия",
     "foot.made":"Сделано с ☘ на побережье Чёрного моря"
   }
 };
