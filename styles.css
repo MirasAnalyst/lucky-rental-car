@@ -76,8 +76,12 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:500;line-height:1.1
 .nav.scrolled{background:rgba(10,10,12,.9);border-color:var(--line-soft)}
 .nav.nav--hide{transform:translateY(-100%)}
 .nav__inner{display:flex;align-items:center;height:82px;gap:26px}
-.brand{display:inline-flex;align-items:center;gap:.6em}
+.brand{display:inline-flex;align-items:center;gap:.7em}
 .brand__clover{color:var(--gold);font-size:1.4rem;line-height:1}
+.brand__logo{width:46px;height:46px;border-radius:50%;object-fit:cover;flex:none;
+  box-shadow:0 0 0 1px rgba(255,255,255,.14), 0 6px 18px -8px rgba(0,0,0,.6);transition:transform .4s var(--ease)}
+.brand:hover .brand__logo{transform:scale(1.06)}
+.footer .brand__logo{width:52px;height:52px}
 .brand__text{display:flex;flex-direction:column;line-height:1.05}
 .brand__text b{font-family:'Playfair Display',serif;font-size:1.12rem;letter-spacing:.2em;font-weight:600}
 .brand__text i{font-style:normal;font-size:.55rem;letter-spacing:.4em;color:var(--muted);font-weight:600}
