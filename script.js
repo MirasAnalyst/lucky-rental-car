@@ -46,6 +46,8 @@ const FLEET = [
 /* ---- Translations ---- */
 const I18N = {
   en: {
+    "meta.title":"Car Rental in Batumi — No Deposit, 24/7 | Lucky Rental Car Georgia",
+    "meta.description":"Rent a car in Batumi, Georgia with Lucky Rental Car. No deposit, full CASCO insurance, free delivery to your hotel or the airport, and 24/7 support. Sedans & SUVs from $35/day — book on WhatsApp or Telegram.",
     "top.address":"Zhiuli Shartava St. 16, Batumi 6010",
     "top.hours":"Open 24/7 — Support around the clock",
     "top.pay":"We accept USD · EUR · GEL · USDT",
@@ -116,6 +118,8 @@ const I18N = {
     "foot.made":"Made with ☘ on the Black Sea coast"
   },
   ru: {
+    "meta.title":"Аренда авто в Батуми — без залога, 24/7 | Lucky Rental Car",
+    "meta.description":"Аренда авто в Батуми, Грузия с Lucky Rental Car. Без залога, полное КАСКО, бесплатная доставка в отель или аэропорт и поддержка 24/7. Седаны и кроссоверы от $35/сутки — бронируйте в WhatsApp или Telegram.",
     "top.address":"ул. Жиули Шартава 16, Батуми 6010",
     "top.hours":"Работаем 24/7 — Поддержка круглосуточно",
     "top.pay":"Принимаем USD · EUR · GEL · USDT",
@@ -195,11 +199,29 @@ const url = {
   fb:  `https://facebook.com/${CONTACT.facebook}`
 };
 
-/* ---- Language ---- */
-let LANG = localStorage.getItem('lang') || (navigator.language||'en').slice(0,2).toLowerCase();
+/* ---- Language (URL ?lang=ru is crawlable & shareable) ---- */
+const SITE_BASE = 'https://mirasanalyst.github.io/lucky-rental-car/';
+const urlLang = new URLSearchParams(location.search).get('lang');
+let LANG = urlLang || localStorage.getItem('lang') || (navigator.language||'en').slice(0,2).toLowerCase();
 if(LANG!=='ru') LANG='en';
 
 function t(key){ return (I18N[LANG] && I18N[LANG][key]) ?? (I18N.en[key] ?? key); }
+
+/* Keep SEO tags in sync with the active language */
+function syncSeoTags(){
+  const selfUrl = LANG==='ru' ? SITE_BASE+'?lang=ru' : SITE_BASE;
+  const set = (sel,attr,val)=>{ const el=document.querySelector(sel); if(el) el.setAttribute(attr,val); };
+  document.title = t('meta.title');
+  set('meta[name="description"]','content', t('meta.description'));
+  set('#canonical','href', selfUrl);
+  set('meta[property="og:url"]','content', selfUrl);
+  set('meta[property="og:title"]','content', t('meta.title'));
+  set('meta[property="og:description"]','content', t('meta.description'));
+  set('meta[property="og:locale"]','content', LANG==='ru'?'ru_RU':'en_US');
+  set('meta[property="og:locale:alternate"]','content', LANG==='ru'?'en_US':'ru_RU');
+  set('meta[name="twitter:title"]','content', t('meta.title'));
+  set('meta[name="twitter:description"]','content', t('meta.description'));
+}
 
 function applyLang(){
   document.documentElement.lang = LANG;
@@ -208,12 +230,15 @@ function applyLang(){
     if(I18N[LANG][k] !== undefined || I18N.en[k] !== undefined) el.innerHTML = t(k);
   });
   document.querySelectorAll('#lang .lang__btn').forEach(b=>b.classList.toggle('active', b.dataset.lang===LANG));
+  syncSeoTags();
   renderFleet();
 }
 
 function setLang(l){
   LANG = (l==='ru')?'ru':'en';
   localStorage.setItem('lang', LANG);
+  /* reflect language in the URL without reloading (shareable + consistent with hreflang) */
+  try{ const u=new URL(location.href); if(LANG==='ru') u.searchParams.set('lang','ru'); else u.searchParams.delete('lang'); history.replaceState(null,'',u); }catch(e){}
   applyLang();
 }
 
@@ -246,7 +271,7 @@ function renderFleet(){
     <article class="car reveal in">
       <div class="car__media">
         <span class="car__class">${c.cls[LANG]}</span>
-        <img src="${c.img}" alt="${c.name}" loading="lazy">
+        <img src="${c.img}" alt="${LANG==='ru'?'Аренда '+c.name+' в Батуми — Lucky Rental Car':'Rent '+c.name+' in Batumi — Lucky Rental Car'}" width="1200" height="825" loading="lazy" decoding="async">
       </div>
       <div class="car__body">
         <h3 class="car__name">${c.name}</h3>

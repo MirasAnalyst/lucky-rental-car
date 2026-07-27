@@ -1,0 +1,15 @@
+{
+  "name": "Lucky Rental Car — Batumi",
+  "short_name": "Lucky Rental",
+  "description": "Premium car rental in Batumi, Georgia. No deposit, full CASCO insurance, free delivery, 24/7 support.",
+  "start_url": "/lucky-rental-car/",
+  "scope": "/lucky-rental-car/",
+  "display": "standalone",
+  "background_color": "#0c0c0e",
+  "theme_color": "#0c0c0e",
+  "lang": "en",
+  "icons": [
+    { "src": "images/logo.jpg", "sizes": "256x256", "type": "image/jpeg" },
+    { "src": "apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

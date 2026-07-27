@@ -82,6 +82,19 @@ Prices are **per-day "from" rates**; the Hyundai Sonata uses your real tiered pr
   "Discover Batumi" travel guide, a customer testimonial, and multi-channel contact
 - Consistent NAP (Name, Address, Phone) across the page and schema for local SEO
 
+**Advanced SEO added:**
+- **Bilingual SEO** — `?lang=ru` is a crawlable, shareable URL; `hreflang` alternates (en/ru/x-default);
+  title, meta description, canonical (self-referencing) and og:locale all swap per language.
+- **Rich-result structured data** — AutoRental business with `logo`, `makesOffer` fleet catalog
+  (7 cars + per-day prices), languages and service area; plus the FAQPage schema.
+- **Local SEO** — `geo.region`/`geo.position`/`ICBM` meta + verified Google Maps listing (`hasMap`).
+- **Core Web Vitals** — explicit `width`/`height` on all images (prevents layout shift),
+  `decoding="async"`, hero `fetchpriority=high`, CDN preconnect/dns-prefetch.
+- **Descriptive, keyword-rich alt text** on every image (localized EN/RU on fleet cars).
+- **Image sitemap** + hreflang entries in `sitemap.xml`; PWA `site.webmanifest`.
+- Assets are versioned (`styles.css?v=2`, `script.js?v=2`) so returning visitors get updates —
+  bump the number when you change CSS/JS.
+
 ### 👉 Before you go live
 1. **Set your real domain.** Replace every `https://luckyrentalcar.ge/` in `index.html`
    (canonical, OG, JSON-LD, share image URL), in `robots.txt`, and in `sitemap.xml`.
