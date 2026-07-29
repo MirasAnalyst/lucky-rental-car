@@ -65,8 +65,16 @@ On each card the visitor picks a rental period and the price + WhatsApp booking 
 other cars use a sensible "shorter = pricier" estimate. **Please review every `prices` array** and
 adjust to your real rates. Example:
 ```js
-{ name:"Mercedes-Benz C-Class", prices:[95,80,70,65], ... }  // 1-3d, 4-7d, 8-30d, 30+d
+{ name:"Mercedes-Benz C-Class", photos:P('mercedes',5), prices:[95,80,70,65], ... }  // 1-3d,4-7d,8-30d,30+d
 ```
+
+## Per-car photo galleries
+Each car has a `photos` array — `P('sonata',5)` means `images/car-sonata-1.jpg … -5.jpg`.
+- `photos[0]` is the **main card image** (always a front shot).
+- Clicking/tapping a car's photo opens a full-screen gallery you can navigate with the arrows,
+  arrow keys, or **swipe** on mobile; it shows a `1 / 5` counter and locks background scroll.
+- To add/remove a car's photos: drop `car-<slug>-<n>.jpg` files in `images/` and change the count
+  in `P('<slug>', <n>)`. Same lightbox powers the bottom "Gallery" section.
 
 ## SEO — what's included
 **Technical (developer):**

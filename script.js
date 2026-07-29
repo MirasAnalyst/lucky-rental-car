@@ -19,39 +19,46 @@ const DAY_TIERS = [
   { key:"30+",  en:"30+ days",  ru:"30+ дней" }
 ];
 
+/* photos: [front/main, ...more angles]. Add/remove files in images/ and update the count. */
+const P = (slug,n) => Array.from({length:n},(_,i)=>`images/car-${slug}-${i+1}.jpg`);
+
 /* ---- Fleet data (bilingual). prices = [1-3d, 4-7d, 8-30d, 30+d] per day in USD. ---- */
 const FLEET = [
-  { name:"Hyundai Sonata", img:"images/car-sonata.jpg", prices:[60,50,45,40],
+  { name:"Hyundai Sonata", photos:P('sonata',5), prices:[60,50,45,40],
     cls:{en:"Comfort Sedan",ru:"Комфорт-седан"},
     tag:{en:"Smooth, quiet 180 HP cruiser for the coast",ru:"Тихий и плавный седан 180 л.с."},
     specs:{en:["Automatic","180 HP","5 seats","Petrol"],ru:["Автомат","180 л.с.","5 мест","Бензин"]} },
-  { name:"Mercedes-Benz C-Class", img:"images/car-mercedes.jpg", prices:[95,80,70,65],
+  { name:"Mercedes-Benz C-Class", photos:P('mercedes',5), prices:[95,80,70,65],
     cls:{en:"Premium Coupe",ru:"Премиум-купе"},
     tag:{en:"Arrive in style along the promenade",ru:"Прибывайте с шиком по набережной"},
     specs:{en:["Automatic","4 seats","Leather","Premium"],ru:["Автомат","4 места","Кожа","Премиум"]} },
-  { name:"Subaru Forester Sport", img:"images/car-forester.jpg", prices:[75,65,55,50],
+  { name:"Subaru Forester Sport", photos:P('forester',5), prices:[75,65,55,50],
     cls:{en:"AWD SUV",ru:"Полный привод"},
     tag:{en:"All-wheel drive for mountain roads",ru:"Полный привод для горных дорог"},
     specs:{en:["Automatic","5 seats","AWD","Petrol"],ru:["Автомат","5 мест","4WD","Бензин"]} },
-  { name:"Mitsubishi Outlander", img:"images/car-outlander.jpg", prices:[65,55,50,45],
+  { name:"Mitsubishi Outlander", photos:P('outlander',5), prices:[65,55,50,45],
     cls:{en:"Family SUV",ru:"Семейный кроссовер"},
     tag:{en:"Space for the whole family & luggage",ru:"Простор для всей семьи и багажа"},
     specs:{en:["Automatic","5 seats","Roomy","Petrol"],ru:["Автомат","5 мест","Просторный","Бензин"]} },
-  { name:"Ford Escape Hybrid", img:"images/car-ford-escape.jpg", prices:[60,50,45,40],
+  { name:"Ford Escape Hybrid", photos:P('ford-escape',5), prices:[60,50,45,40],
     cls:{en:"Economy Hybrid",ru:"Гибрид"},
     tag:{en:"Low fuel costs, go further for less",ru:"Экономичный расход топлива"},
     specs:{en:["Automatic","5 seats","Hybrid","Eco"],ru:["Автомат","5 мест","Гибрид","Эко"]} },
-  { name:"BMW X1", img:"images/car-bmw-x1.jpg", prices:[75,65,55,50],
+  { name:"BMW X1", photos:P('bmw-x1',5), prices:[75,65,55,50],
     cls:{en:"Compact SUV",ru:"Компакт-кроссовер"},
     tag:{en:"Agile, premium & easy to park",ru:"Манёвренный и премиальный"},
     specs:{en:["Automatic","5 seats","Sport","Petrol"],ru:["Автомат","5 мест","Спорт","Бензин"]} },
-  { name:"Mitsubishi ASX", img:"images/car-asx.jpg", prices:[50,45,40,35],
+  { name:"Mitsubishi ASX", photos:P('asx',5), prices:[50,45,40,35],
     cls:{en:"Compact SUV",ru:"Компакт-кроссовер"},
     tag:{en:"Nimble city SUV, easy on fuel",ru:"Юркий городской кроссовер"},
     specs:{en:["Automatic","5 seats","Compact","Petrol"],ru:["Автомат","5 мест","Компакт","Бензин"]} }
 ];
 /* Remembers each car's selected day-tier across re-renders (e.g. language switch) */
 const carTier = FLEET.map(()=>0);
+
+/* Shared lightbox opener (assigned in initLightbox) + Lenis handle for scroll-lock */
+let openLightbox = () => {};
+let lenisInstance = null;
 
 /* ---- Translations ---- */
 const I18N = {
@@ -288,10 +295,11 @@ function renderFleet(){
       `<button type="button" class="car__tier${k===ti?' is-active':''}" data-car="${ci}" data-tier="${k}" aria-pressed="${k===ti}">${tr[LANG]}</button>`).join('');
     return `
     <article class="car reveal in" data-car="${ci}">
-      <div class="car__media">
+      <button type="button" class="car__media" data-gallery="${ci}" aria-label="${LANG==='ru'?'Смотреть фото — '+c.name:'View photos — '+c.name}">
         <span class="car__class">${c.cls[LANG]}</span>
-        <img src="${c.img}" alt="${alt}" width="1200" height="825" loading="lazy" decoding="async">
-      </div>
+        <img src="${c.photos[0]}" alt="${alt}" width="1200" height="825" loading="lazy" decoding="async">
+        <span class="car__count"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3 7.2 5H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-3.2L15 3H9zm3 5.5A4.5 4.5 0 1 1 12 17a4.5 4.5 0 0 1 0-9zm0 2A2.5 2.5 0 1 0 12 15a2.5 2.5 0 0 0 0-5z"/></svg>${c.photos.length}</span>
+      </button>
       <div class="car__body">
         <h3 class="car__name">${c.name}</h3>
         <p class="car__tag">${c.tag[LANG]}</p>
@@ -315,6 +323,8 @@ function initFleetInteractions(){
   const grid = document.getElementById('fleetGrid');
   if(!grid) return;
   grid.addEventListener('click', e=>{
+    const media = e.target.closest('.car__media');
+    if(media){ openLightbox(FLEET[+media.dataset.gallery].photos, 0); return; }
     const btn = e.target.closest('.car__tier'); if(!btn) return;
     const ci = +btn.dataset.car, ti = +btn.dataset.tier;
     carTier[ci] = ti;
@@ -354,14 +364,25 @@ function observeReveals(){
 
 /* ---- Lightbox ---- */
 function initLightbox(){
-  const imgs = [...document.querySelectorAll('#gallery-grid img')];
   const box = document.getElementById('lightbox');
   const boxImg = document.getElementById('lightboxImg');
-  let idx = 0;
-  const show = i=>{ idx=(i+imgs.length)%imgs.length; boxImg.src = imgs[idx].src; };
-  const open = ()=>{ box.classList.add('open'); box.setAttribute('aria-hidden','false'); };
-  const close = ()=>{ box.classList.remove('open'); box.setAttribute('aria-hidden','true'); };
-  imgs.forEach((im,i)=>im.parentElement.addEventListener('click',()=>{ show(i); open(); }));
+  const counter = box.querySelector('.lightbox__count');
+  let list = [], idx = 0;
+  const render = ()=>{ boxImg.src = list[idx]; if(counter) counter.textContent = `${idx+1} / ${list.length}`; };
+  const show = i=>{ if(!list.length) return; idx=(i+list.length)%list.length; render(); };
+  const open = ()=>{ box.classList.add('open'); box.setAttribute('aria-hidden','false');
+    document.documentElement.classList.add('no-scroll'); if(lenisInstance) lenisInstance.stop(); };
+  const close = ()=>{ box.classList.remove('open'); box.setAttribute('aria-hidden','true');
+    document.documentElement.classList.remove('no-scroll'); if(lenisInstance) lenisInstance.start(); };
+
+  /* exposed to the whole module: open with any array of image srcs */
+  openLightbox = (srcs, start=0)=>{ if(!srcs || !srcs.length) return; list = srcs.slice(); idx = start; render(); open(); };
+
+  /* wire the gallery-grid thumbnails */
+  const gimgs = [...document.querySelectorAll('#gallery-grid img')];
+  const gsrcs = gimgs.map(im=>im.getAttribute('src'));
+  gimgs.forEach((im,i)=>im.parentElement.addEventListener('click',()=>openLightbox(gsrcs,i)));
+
   box.querySelector('.lightbox__close').onclick = close;
   box.querySelector('.lightbox__next').onclick = e=>{ e.stopPropagation(); show(idx+1); };
   box.querySelector('.lightbox__prev').onclick = e=>{ e.stopPropagation(); show(idx-1); };
@@ -369,9 +390,17 @@ function initLightbox(){
   addEventListener('keydown', e=>{
     if(!box.classList.contains('open')) return;
     if(e.key==='Escape') close();
-    if(e.key==='ArrowRight') show(idx+1);
-    if(e.key==='ArrowLeft') show(idx-1);
+    else if(e.key==='ArrowRight') show(idx+1);
+    else if(e.key==='ArrowLeft') show(idx-1);
   });
+
+  /* touch swipe (mobile) */
+  let sx=0, sy=0;
+  box.addEventListener('touchstart', e=>{ const t=e.changedTouches[0]; sx=t.clientX; sy=t.clientY; }, {passive:true});
+  box.addEventListener('touchend', e=>{
+    const t=e.changedTouches[0], dx=t.clientX-sx, dy=t.clientY-sy;
+    if(Math.abs(dx)>45 && Math.abs(dx)>Math.abs(dy)) show(idx + (dx<0?1:-1));
+  }, {passive:true});
 }
 
 /* ---- Professional motion (GSAP + ScrollTrigger + Lenis) ---- */
@@ -389,6 +418,7 @@ function initMotion(){
   let lenis = null;
   if(window.Lenis){
     lenis = new window.Lenis({ duration:1.05, easing:t=>Math.min(1,1.001-Math.pow(2,-10*t)), smoothWheel:true });
+    lenisInstance = lenis;
     lenis.on('scroll', ST.update);
     gsap.ticker.add(t=> lenis.raf(t*1000));
     gsap.ticker.lagSmoothing(0);

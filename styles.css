@@ -172,9 +172,18 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:500;line-height:1.1
 .fleet-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,3vw,36px)}
 .car{background:transparent;display:flex;flex-direction:column;transition:transform .5s var(--ease)}
 .car:hover{transform:translateY(-6px)}
-.car__media{position:relative;aspect-ratio:16/11;overflow:hidden;border-radius:var(--radius);margin-bottom:20px}
+.car__media{position:relative;display:block;width:100%;padding:0;border:0;background:none;font:inherit;
+  aspect-ratio:16/11;overflow:hidden;border-radius:var(--radius);margin-bottom:20px;cursor:pointer}
 .car__media img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
 .car:hover .car__media img{transform:scale(1.06)}
+.car__media::after{content:"";position:absolute;inset:0;background:rgba(12,12,14,.18);opacity:0;transition:opacity .35s}
+.car__media:hover::after{opacity:1}
+.car__count{position:absolute;bottom:12px;right:12px;display:inline-flex;align-items:center;gap:5px;
+  background:rgba(12,12,14,.62);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  color:#fff;font-size:.72rem;font-weight:600;padding:5px 10px;border-radius:100px;z-index:2;
+  transition:background .3s}
+.car__count svg{width:14px;height:14px;fill:currentColor}
+.car__media:hover .car__count{background:var(--gold);color:#1c160b}
 .car__class{position:absolute;top:14px;left:14px;background:rgba(12,12,14,.6);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#fff;font-size:.66rem;font-weight:600;letter-spacing:.1em;padding:6px 12px;border-radius:100px;text-transform:uppercase}
 .car__body{display:flex;flex-direction:column;flex:1}
 .car__name{font-size:1.32rem;font-weight:500;margin-bottom:4px}
@@ -324,6 +333,10 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:500;line-height:1.1
 .lightbox__nav{position:absolute;top:50%;transform:translateY(-50%);background:none;border:1px solid rgba(255,255,255,.25);color:#fff;width:50px;height:50px;border-radius:50%;font-size:1.6rem;cursor:pointer;transition:background .25s}
 .lightbox__nav:hover{background:rgba(255,255,255,.12)}
 .lightbox__prev{left:24px}.lightbox__next{right:24px}
+.lightbox__count{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);color:#fff;
+  font-size:.85rem;letter-spacing:.06em;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);
+  padding:6px 14px;border-radius:100px}
+.no-scroll{overflow:hidden}
 @media(max-width:600px){.lightbox__nav{width:40px;height:40px}}
 
 /* ---------- Reveal animation (fallback when GSAP absent) ---------- */
