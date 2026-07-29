@@ -59,7 +59,7 @@
 <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
 <link rel="preload" as="image" href="images/hero.jpg" fetchpriority="high" />
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css?v=4" />
+<link rel="stylesheet" href="styles.css?v=5" />
 
 <!-- ===== Structured data: Local business (AutoRental) ===== -->
 <script type="application/ld+json">
@@ -181,11 +181,24 @@
       <div class="hbadge"><b>CASCO</b><span data-i18n="badge.cover">Full Cover</span></div>
     </div>
   </div>
-  <a href="#advantages" class="hero__scroll" aria-label="Scroll down"><span></span></a>
+  <a href="#fleet" class="hero__scroll" aria-label="Scroll down"><span></span></a>
+</section>
+
+<!-- ============ FLEET ============ -->
+<section class="section" id="fleet">
+  <div class="container">
+    <div class="section__head reveal">
+      <span class="kicker" data-i18n="fleet.kicker">Our Fleet</span>
+      <h2 data-i18n="fleet.h">Choose your ride</h2>
+      <p data-i18n="fleet.p">From economical hybrids to premium coupes — hand-picked cars for every kind of Batumi trip. Tap any car to book instantly.</p>
+    </div>
+    <div class="fleet-grid" id="fleetGrid"><!-- cards injected by script.js --></div>
+    <p class="fleet-note reveal" data-i18n="fleet.note">Prices are per-day and drop for longer rentals. Message us for an exact quote and current availability.</p>
+  </div>
 </section>
 
 <!-- ============ ADVANTAGES ============ -->
-<section class="section" id="advantages">
+<section class="section section--dark" id="advantages">
   <div class="container">
     <div class="section__head reveal">
       <span class="kicker" data-i18n="adv.kicker">Why Lucky Rental Car</span>
@@ -210,19 +223,6 @@
     <div class="stat reveal"><b>15+</b><span data-i18n="stat.cars">Cars in fleet</span></div>
     <div class="stat reveal"><b>100%</b><span data-i18n="stat.casco">CASCO covered</span></div>
     <div class="stat reveal"><b>0₾</b><span data-i18n="stat.deposit">Deposit required</span></div>
-  </div>
-</section>
-
-<!-- ============ FLEET ============ -->
-<section class="section section--dark" id="fleet">
-  <div class="container">
-    <div class="section__head reveal">
-      <span class="kicker" data-i18n="fleet.kicker">Our Fleet</span>
-      <h2 data-i18n="fleet.h">Choose your ride</h2>
-      <p data-i18n="fleet.p">From economical hybrids to premium coupes — hand-picked cars for every kind of Batumi trip. Tap any car to book instantly.</p>
-    </div>
-    <div class="fleet-grid" id="fleetGrid"><!-- cards injected by script.js --></div>
-    <p class="fleet-note reveal" data-i18n="fleet.note">Prices are per-day and drop for longer rentals. Message us for an exact quote and current availability.</p>
   </div>
 </section>
 
@@ -476,6 +476,6 @@
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-<script defer src="script.js?v=4"></script>
+<script defer src="script.js?v=5"></script>
 </body>
 </html>
