@@ -5,8 +5,8 @@
   "start_url": "/lucky-rental-car/",
   "scope": "/lucky-rental-car/",
   "display": "standalone",
-  "background_color": "#0c0c0e",
-  "theme_color": "#0c0c0e",
+  "background_color": "#08192b",
+  "theme_color": "#08192b",
   "lang": "en",
   "icons": [
     { "src": "images/logo.jpg", "sizes": "256x256", "type": "image/jpeg" },
