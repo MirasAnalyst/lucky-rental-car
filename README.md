@@ -56,10 +56,17 @@ Every WhatsApp / Telegram / Instagram / Facebook button, the floating buttons an
 buttons on each car update automatically from these values.
 👉 **Please confirm the Facebook page** — I used `facebook.com/lucky_rentalcar` as a guess.
 
-## Fleet & prices
-In `script.js`, the `FLEET` array lists each car (name, class, image, price, specs — bilingual).
-Prices are **per-day "from" rates**; the Hyundai Sonata uses your real tiered pricing
-(1–2 days $60 · 3–5 days $50 · 6–10 days $40). Please confirm the rates for the other cars.
+## Fleet & tiered prices
+In `script.js`, the `FLEET` array lists each car. Each car has a `prices` array mapping to the
+day tiers defined in `DAY_TIERS` — **[1–3 days, 4–7 days, 8–30 days, 30+ days]** (per day, USD).
+On each card the visitor picks a rental period and the price + WhatsApp booking message update live.
+
+⚠️ Only the **Hyundai Sonata** tiers ($60/$50/$45/$40) reflect your real Instagram pricing — the
+other cars use a sensible "shorter = pricier" estimate. **Please review every `prices` array** and
+adjust to your real rates. Example:
+```js
+{ name:"Mercedes-Benz C-Class", prices:[95,80,70,65], ... }  // 1-3d, 4-7d, 8-30d, 30+d
+```
 
 ## SEO — what's included
 **Technical (developer):**

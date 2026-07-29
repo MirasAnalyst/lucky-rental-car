@@ -11,37 +11,47 @@ const CONTACT = {
   phoneDisplay: "+995 555 562 877"
 };
 
-/* ---- Fleet data (bilingual). Edit names / prices / specs freely. ---- */
+/* ---- Rental day tiers (price index maps to each car's `prices` array below) ---- */
+const DAY_TIERS = [
+  { key:"1-3",  en:"1–3 days",  ru:"1–3 дня"  },
+  { key:"4-7",  en:"4–7 days",  ru:"4–7 дней" },
+  { key:"8-30", en:"8–30 days", ru:"8–30 дней"},
+  { key:"30+",  en:"30+ days",  ru:"30+ дней" }
+];
+
+/* ---- Fleet data (bilingual). prices = [1-3d, 4-7d, 8-30d, 30+d] per day in USD. ---- */
 const FLEET = [
-  { name:"Hyundai Sonata", img:"images/car-sonata.jpg", price:40, tiers:"$60 · $50 · $40",
+  { name:"Hyundai Sonata", img:"images/car-sonata.jpg", prices:[60,50,45,40],
     cls:{en:"Comfort Sedan",ru:"Комфорт-седан"},
     tag:{en:"Smooth, quiet 180 HP cruiser for the coast",ru:"Тихий и плавный седан 180 л.с."},
     specs:{en:["Automatic","180 HP","5 seats","Petrol"],ru:["Автомат","180 л.с.","5 мест","Бензин"]} },
-  { name:"Mercedes-Benz C-Class", img:"images/car-mercedes.jpg", price:65,
+  { name:"Mercedes-Benz C-Class", img:"images/car-mercedes.jpg", prices:[95,80,70,65],
     cls:{en:"Premium Coupe",ru:"Премиум-купе"},
     tag:{en:"Arrive in style along the promenade",ru:"Прибывайте с шиком по набережной"},
     specs:{en:["Automatic","4 seats","Leather","Premium"],ru:["Автомат","4 места","Кожа","Премиум"]} },
-  { name:"Subaru Forester Sport", img:"images/car-forester.jpg", price:50,
+  { name:"Subaru Forester Sport", img:"images/car-forester.jpg", prices:[75,65,55,50],
     cls:{en:"AWD SUV",ru:"Полный привод"},
     tag:{en:"All-wheel drive for mountain roads",ru:"Полный привод для горных дорог"},
     specs:{en:["Automatic","5 seats","AWD","Petrol"],ru:["Автомат","5 мест","4WD","Бензин"]} },
-  { name:"Mitsubishi Outlander", img:"images/car-outlander.jpg", price:45,
+  { name:"Mitsubishi Outlander", img:"images/car-outlander.jpg", prices:[65,55,50,45],
     cls:{en:"Family SUV",ru:"Семейный кроссовер"},
     tag:{en:"Space for the whole family & luggage",ru:"Простор для всей семьи и багажа"},
     specs:{en:["Automatic","5 seats","Roomy","Petrol"],ru:["Автомат","5 мест","Просторный","Бензин"]} },
-  { name:"Ford Escape Hybrid", img:"images/car-ford-escape.jpg", price:40,
+  { name:"Ford Escape Hybrid", img:"images/car-ford-escape.jpg", prices:[60,50,45,40],
     cls:{en:"Economy Hybrid",ru:"Гибрид"},
     tag:{en:"Low fuel costs, go further for less",ru:"Экономичный расход топлива"},
     specs:{en:["Automatic","5 seats","Hybrid","Eco"],ru:["Автомат","5 мест","Гибрид","Эко"]} },
-  { name:"BMW X1", img:"images/car-bmw-x1.jpg", price:50,
+  { name:"BMW X1", img:"images/car-bmw-x1.jpg", prices:[75,65,55,50],
     cls:{en:"Compact SUV",ru:"Компакт-кроссовер"},
     tag:{en:"Agile, premium & easy to park",ru:"Манёвренный и премиальный"},
     specs:{en:["Automatic","5 seats","Sport","Petrol"],ru:["Автомат","5 мест","Спорт","Бензин"]} },
-  { name:"Mitsubishi ASX", img:"images/car-asx.jpg", price:35,
+  { name:"Mitsubishi ASX", img:"images/car-asx.jpg", prices:[50,45,40,35],
     cls:{en:"Compact SUV",ru:"Компакт-кроссовер"},
     tag:{en:"Nimble city SUV, easy on fuel",ru:"Юркий городской кроссовер"},
     specs:{en:["Automatic","5 seats","Compact","Petrol"],ru:["Автомат","5 мест","Компакт","Бензин"]} }
 ];
+/* Remembers each car's selected day-tier across re-renders (e.g. language switch) */
+const carTier = FLEET.map(()=>0);
 
 /* ---- Translations ---- */
 const I18N = {
@@ -69,7 +79,7 @@ const I18N = {
     "fleet.kicker":"Our Fleet","fleet.h":"Choose your ride",
     "fleet.p":"From economical hybrids to premium coupes — hand-picked cars for every kind of Batumi trip. Tap any car to book instantly.",
     "fleet.note":"Prices are per-day and drop for longer rentals. Message us for an exact quote and current availability.",
-    "fleet.from":"from","fleet.day":"per day","fleet.book":"Book",
+    "fleet.from":"from","fleet.day":"per day","fleet.book":"Book","fleet.rentalDays":"Rental period",
     "promo.badge":"Birthday Special","promo.h":"10% OFF for birthday guests",
     "promo.p":"Renting during your birthday? Show your passport when booking and enjoy 10% off as our gift to you.",
     "promo.cta":"Claim your discount",
@@ -141,7 +151,7 @@ const I18N = {
     "fleet.kicker":"Наш автопарк","fleet.h":"Выберите автомобиль",
     "fleet.p":"От экономичных гибридов до премиум-купе — авто под любую поездку по Батуми. Нажмите на машину, чтобы забронировать.",
     "fleet.note":"Цены указаны за сутки и снижаются при длительной аренде. Напишите нам для точного расчёта и наличия.",
-    "fleet.from":"от","fleet.day":"в сутки","fleet.book":"Бронь",
+    "fleet.from":"от","fleet.day":"в сутки","fleet.book":"Бронь","fleet.rentalDays":"Срок аренды",
     "promo.badge":"Специально ко дню рождения","promo.h":"Скидка 10% для именинников",
     "promo.p":"Арендуете авто в свой день рождения? Покажите паспорт при оформлении и получите скидку 10% в подарок.",
     "promo.cta":"Получить скидку",
@@ -242,10 +252,14 @@ function setLang(l){
   applyLang();
 }
 
-/* ---- Booking link with prefilled message ---- */
-const waBook = (car) => `${url.wa}?text=${encodeURIComponent(
-  LANG==='ru' ? `Здравствуйте, Lucky Rental Car! Хочу забронировать ${car}. Есть в наличии?`
-              : `Hello Lucky Rental Car! I'd like to book the ${car}. Is it available?`)}`;
+/* ---- Booking link with prefilled message (includes selected day-tier + price) ---- */
+function waBook(ci){
+  const c=FLEET[ci], ti=carTier[ci], tier=DAY_TIERS[ti], price=c.prices[ti];
+  const msg = LANG==='ru'
+    ? `Здравствуйте, Lucky Rental Car! Хочу забронировать ${c.name} на ${tier.ru} — $${price}/сутки. Есть в наличии?`
+    : `Hello Lucky Rental Car! I'd like to book the ${c.name} for ${tier.en} — $${price}/day. Is it available?`;
+  return `${url.wa}?text=${encodeURIComponent(msg)}`;
+}
 
 /* ---- Wire generic contact links ---- */
 function wireLinks(){
@@ -267,23 +281,52 @@ function wireLinks(){
 function renderFleet(){
   const grid = document.getElementById('fleetGrid');
   if(!grid) return;
-  grid.innerHTML = FLEET.map(c=>`
-    <article class="car reveal in">
+  grid.innerHTML = FLEET.map((c,ci)=>{
+    const ti = carTier[ci], price = c.prices[ti];
+    const alt = LANG==='ru' ? 'Аренда '+c.name+' в Батуми — Lucky Rental Car' : 'Rent '+c.name+' in Batumi — Lucky Rental Car';
+    const tiers = DAY_TIERS.map((tr,k)=>
+      `<button type="button" class="car__tier${k===ti?' is-active':''}" data-car="${ci}" data-tier="${k}" aria-pressed="${k===ti}">${tr[LANG]}</button>`).join('');
+    return `
+    <article class="car reveal in" data-car="${ci}">
       <div class="car__media">
         <span class="car__class">${c.cls[LANG]}</span>
-        <img src="${c.img}" alt="${LANG==='ru'?'Аренда '+c.name+' в Батуми — Lucky Rental Car':'Rent '+c.name+' in Batumi — Lucky Rental Car'}" width="1200" height="825" loading="lazy" decoding="async">
+        <img src="${c.img}" alt="${alt}" width="1200" height="825" loading="lazy" decoding="async">
       </div>
       <div class="car__body">
         <h3 class="car__name">${c.name}</h3>
         <p class="car__tag">${c.tag[LANG]}</p>
         <div class="car__specs">${c.specs[LANG].map(s=>`<span>${s}</span>`).join('')}</div>
+        <div class="car__tierwrap">
+          <span class="car__tierlabel">${t('fleet.rentalDays')}</span>
+          <div class="car__tiers" role="group" aria-label="${t('fleet.rentalDays')}">${tiers}</div>
+        </div>
         <div class="car__foot">
-          <div class="car__price"><small>${t('fleet.from')}</small><b>$${c.price}</b><span>${t('fleet.day')}</span></div>
-          <a class="btn btn--wa" href="${waBook(c.name)}" target="_blank" rel="noopener" data-wired="1">${t('fleet.book')}</a>
+          <div class="car__price"><b class="car__amount">$${price}</b><span>${t('fleet.day')}</span></div>
+          <a class="btn btn--wa car__book" href="${waBook(ci)}" target="_blank" rel="noopener" data-wired="1">${t('fleet.book')}</a>
         </div>
       </div>
-    </article>`).join('');
+    </article>`;
+  }).join('');
   wireLinks();
+}
+
+/* ---- Fleet day-tier selector → live price + booking link (delegated, set up once) ---- */
+function initFleetInteractions(){
+  const grid = document.getElementById('fleetGrid');
+  if(!grid) return;
+  grid.addEventListener('click', e=>{
+    const btn = e.target.closest('.car__tier'); if(!btn) return;
+    const ci = +btn.dataset.car, ti = +btn.dataset.tier;
+    carTier[ci] = ti;
+    const card = btn.closest('.car');
+    card.querySelectorAll('.car__tier').forEach(x=>{
+      const on = x===btn; x.classList.toggle('is-active',on); x.setAttribute('aria-pressed',on);
+    });
+    const amt = card.querySelector('.car__amount');
+    amt.textContent = '$'+FLEET[ci].prices[ti];
+    amt.classList.remove('bump'); void amt.offsetWidth; amt.classList.add('bump');
+    card.querySelector('.car__book').href = waBook(ci);
+  });
 }
 
 /* ---- Sticky nav shadow ---- */
@@ -414,5 +457,6 @@ function initMotion(){
 document.getElementById('year').textContent = new Date().getFullYear();
 applyLang();      // renders fleet + translates
 wireLinks();
+initFleetInteractions();  // day-tier price selector (delegated, survives re-render)
 initLightbox();
 initMotion();     // GSAP/Lenis when available & motion allowed; else static reveals

@@ -179,12 +179,23 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:500;line-height:1.1
 .car__body{display:flex;flex-direction:column;flex:1}
 .car__name{font-size:1.32rem;font-weight:500;margin-bottom:4px}
 .car__tag{color:var(--muted);font-size:.9rem;margin-bottom:18px;line-height:1.55}
-.car__specs{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:22px}
+.car__specs{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px}
 .car__specs span{font-size:.74rem;color:var(--muted);border:1px solid var(--line);padding:4px 11px;border-radius:100px}
+/* Day-tier selector */
+.car__tierwrap{margin-bottom:20px}
+.car__tierlabel{display:block;font-size:.64rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2);margin-bottom:9px}
+.car__tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.car__tier{font-family:inherit;font-size:.76rem;font-weight:600;color:var(--muted);cursor:pointer;
+  padding:8px 4px;border:1px solid var(--line);border-radius:9px;background:transparent;text-align:center;
+  transition:border-color .25s,color .25s,background .25s;white-space:nowrap}
+.car__tier:hover{color:#fff;border-color:var(--line-2,rgba(255,255,255,.2))}
+.car__tier.is-active{background:var(--gold);border-color:var(--gold);color:#1c160b}
 .car__foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:20px;border-top:1px solid var(--line-soft)}
+.car__amount.bump{animation:priceBump .4s var(--ease)}
+@keyframes priceBump{0%{transform:scale(1)}40%{transform:scale(1.12);color:var(--gold)}100%{transform:scale(1)}}
 .car__price{display:flex;flex-direction:column;line-height:1.05}
 .car__price small{font-size:.64rem;color:var(--muted-2);font-weight:600;text-transform:uppercase;letter-spacing:.12em;order:1;margin-bottom:3px}
-.car__price b{font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:500;color:var(--text);order:2}
+.car__price b{font-family:'Playfair Display',serif;font-size:1.55rem;font-weight:500;color:var(--text);order:2;display:inline-block;transform-origin:left center}
 .car__price span{font-size:.74rem;color:var(--muted-2);order:3;margin-top:1px}
 .car .btn--wa{background:transparent;color:var(--gold);border:1px solid var(--gold);font-weight:600;padding:.66em 1.3em}
 .car .btn--wa:hover{background:var(--gold);color:#1c160b;filter:none}
