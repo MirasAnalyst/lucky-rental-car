@@ -217,7 +217,7 @@ const url = {
 };
 
 /* ---- Language (URL ?lang=ru is crawlable & shareable) ---- */
-const SITE_BASE = 'https://mirasanalyst.github.io/lucky-rental-car/';
+const SITE_BASE = 'https://luckyrent.ge/';
 const urlLang = new URLSearchParams(location.search).get('lang');
 let LANG = urlLang || localStorage.getItem('lang') || (navigator.language||'en').slice(0,2).toLowerCase();
 if(LANG!=='ru') LANG='en';

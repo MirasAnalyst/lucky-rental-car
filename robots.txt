@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mirasanalyst.github.io/lucky-rental-car/sitemap.xml
+Sitemap: https://luckyrent.ge/sitemap.xml
