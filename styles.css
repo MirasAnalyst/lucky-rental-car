@@ -227,13 +227,16 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:500;line-height:1.1
   .car__specs{gap:0;margin-bottom:0;flex-wrap:wrap}
   .car__specs span{font-size:.62rem;padding:0;border:0;background:none;color:var(--muted)}
   .car__specs span:not(:last-child)::after{content:"·";margin:0 5px;opacity:.5}
-  .car__tierwrap{display:none}
-  .car__foot{padding-top:9px;margin-top:9px;border-top:0}
-  .car__price{display:none}
-  .car__price--from{display:flex;flex-direction:column;line-height:1.08}
-  .car__price--from small{font-size:.54rem;color:var(--muted-2);font-weight:600;text-transform:uppercase;letter-spacing:.1em}
-  .car__price--from b{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:500;color:var(--text)}
-  .car__price--from span{font-size:.62rem;color:var(--muted-2)}
+  /* keep the day-tier selector on mobile so price updates by rental length */
+  .car__tierwrap{display:block;margin:9px 0 0}
+  .car__tierlabel{display:none}
+  .car__tiers{gap:5px}
+  .car__tier{font-size:.64rem;padding:6px 2px;border-radius:8px}
+  .car__foot{padding-top:10px;margin-top:10px;border-top:0}
+  .car__price{display:flex}
+  .car__price--from{display:none}
+  .car__price b,.car__amount{font-size:1.2rem}
+  .car__price span{font-size:.62rem}
   .car .btn--wa{padding:.48em 1em;font-size:.76rem}
   /* lift the fleet up: tighter section head on mobile */
   #fleet .section__head{margin-bottom:28px}
