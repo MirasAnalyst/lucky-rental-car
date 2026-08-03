@@ -51,7 +51,7 @@ const FLEET = [
     cls:{en:"Compact SUV",ru:"Компакт-кроссовер"},
     tag:{en:"Nimble city SUV, easy on fuel",ru:"Юркий городской кроссовер"},
     specs:{en:["Automatic","5 seats","Compact","Petrol"],ru:["Автомат","5 мест","Компакт","Бензин"]} },
-  { name:"Ford Escape Hybrid", photos:P('ford-escape',5), prices:[55,50,45],
+  { name:"Ford Escape Hybrid", photos:P('ford-escape',5), prices:[37,33,30],
     cls:{en:"Economy Hybrid",ru:"Гибрид"},
     tag:{en:"Low fuel costs, go further for less",ru:"Экономичный расход топлива"},
     specs:{en:["Automatic","5 seats","Hybrid","Eco"],ru:["Автомат","5 мест","Гибрид","Эко"]} }
@@ -67,7 +67,7 @@ let lenisInstance = null;
 const I18N = {
   en: {
     "meta.title":"Car Rental in Batumi — No Deposit, 24/7 | Lucky Rental Car Georgia",
-    "meta.description":"Rent a car in Batumi, Georgia with Lucky Rental Car. No deposit, full CASCO insurance, free delivery to your hotel or the airport, and 24/7 support. Sedans & SUVs from $40/day — book on WhatsApp or Telegram.",
+    "meta.description":"Rent a car in Batumi, Georgia with Lucky Rental Car. No deposit, full CASCO insurance, free delivery to your hotel or the airport, and 24/7 support. Sedans & SUVs from $30/day — book on WhatsApp or Telegram.",
     "top.address":"Zhiuli Shartava St. 16, Batumi 6010",
     "top.hours":"Open 24/7 — Support around the clock",
     "top.pay":"We accept USD · EUR · GEL · USDT",
@@ -141,7 +141,7 @@ const I18N = {
   },
   ru: {
     "meta.title":"Аренда авто в Батуми — без залога, 24/7 | Lucky Rental Car",
-    "meta.description":"Аренда авто в Батуми, Грузия с Lucky Rental Car. Без залога, полное КАСКО, бесплатная доставка в отель или аэропорт и поддержка 24/7. Седаны и кроссоверы от $40/сутки — бронируйте в WhatsApp или Telegram.",
+    "meta.description":"Аренда авто в Батуми, Грузия с Lucky Rental Car. Без залога, полное КАСКО, бесплатная доставка в отель или аэропорт и поддержка 24/7. Седаны и кроссоверы от $30/сутки — бронируйте в WhatsApp или Telegram.",
     "top.address":"ул. Жиули Шартава 16, Батуми 6010",
     "top.hours":"Работаем 24/7 — Поддержка круглосуточно",
     "top.pay":"Принимаем USD · EUR · GEL · USDT",
