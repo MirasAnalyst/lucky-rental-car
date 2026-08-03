@@ -39,18 +39,22 @@ const FLEET = [
     cls:{en:"Family SUV",ru:"Семейный кроссовер"},
     tag:{en:"Space for the whole family & luggage",ru:"Простор для всей семьи и багажа"},
     specs:{en:["Automatic","5 seats","Roomy","Petrol"],ru:["Автомат","5 мест","Просторный","Бензин"]} },
-  { name:"Jeep Renegade", photos:P('jeep',5), prices:[55,50,40],
+  { name:"Jeep Renegade", photos:P('jeep',6), prices:[55,50,40],
     cls:{en:"Compact SUV",ru:"Компакт-кроссовер"},
     tag:{en:"Rugged & fun for city and trails",ru:"Дерзкий кроссовер для города и трасс"},
     specs:{en:["Automatic","5 seats","4x4","Petrol"],ru:["Автомат","5 мест","4x4","Бензин"]} },
-  { name:"BMW X1", photos:P('bmw-x1',5), prices:[75,70,60],
+  { name:"BMW X1", photos:P('bmw-x1',6), prices:[75,70,60],
     cls:{en:"Compact SUV",ru:"Компакт-кроссовер"},
     tag:{en:"Agile, premium & easy to park",ru:"Манёвренный и премиальный"},
     specs:{en:["Automatic","5 seats","Sport","Petrol"],ru:["Автомат","5 мест","Спорт","Бензин"]} },
   { name:"Mitsubishi Outlander Sport", photos:P('asx',6), prices:[60,50,40],
     cls:{en:"Compact SUV",ru:"Компакт-кроссовер"},
     tag:{en:"Nimble city SUV, easy on fuel",ru:"Юркий городской кроссовер"},
-    specs:{en:["Automatic","5 seats","Compact","Petrol"],ru:["Автомат","5 мест","Компакт","Бензин"]} }
+    specs:{en:["Automatic","5 seats","Compact","Petrol"],ru:["Автомат","5 мест","Компакт","Бензин"]} },
+  { name:"Ford Escape Hybrid", photos:P('ford-escape',5), prices:[55,50,45],
+    cls:{en:"Economy Hybrid",ru:"Гибрид"},
+    tag:{en:"Low fuel costs, go further for less",ru:"Экономичный расход топлива"},
+    specs:{en:["Automatic","5 seats","Hybrid","Eco"],ru:["Автомат","5 мест","Гибрид","Эко"]} }
 ];
 /* Remembers each car's selected day-tier across re-renders (e.g. language switch) */
 const carTier = FLEET.map(()=>0);
