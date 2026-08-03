@@ -217,8 +217,9 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:500;line-height:1.1
   .car{flex-direction:row;align-items:stretch;background:var(--panel);border:1px solid var(--line-soft);border-radius:14px;overflow:hidden}
   .car:hover{transform:none}
   .car:hover .car__media img{transform:none}
-  .car__media{width:40%;min-width:120px;max-width:150px;flex:none;aspect-ratio:auto;border-radius:0;margin-bottom:0}
-  .car__media img{height:100%}
+  /* landscape thumbnail matching the photo (16:11), centered, so the whole car shows */
+  .car__media{width:42%;min-width:130px;max-width:165px;flex:none;aspect-ratio:16/11;align-self:center;height:auto;border-radius:10px;margin:0 0 0 12px;overflow:hidden}
+  .car__media img{width:100%;height:100%;object-fit:cover}
   .car__class{top:8px;left:8px;font-size:.58rem;padding:3px 7px}
   .car__count{display:none}
   .car__body{padding:10px 13px;justify-content:center}
