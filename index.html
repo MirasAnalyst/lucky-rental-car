@@ -59,7 +59,7 @@
 <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
 <link rel="preload" as="image" href="images/hero.jpg" fetchpriority="high" />
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css?v=17" />
+<link rel="stylesheet" href="styles.css?v=18" />
 
 <!-- ===== Structured data: Local business (AutoRental) ===== -->
 <script type="application/ld+json">
@@ -114,6 +114,12 @@
     "https://wa.me/995555562877",
     "https://t.me/995555562877",
     "https://facebook.com/lucky_rentalcar"
+  ],
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "25", "bestRating": "5" },
+  "review": [
+    { "@type": "Review", "author": { "@type": "Person", "name": "Sam Alt" }, "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }, "reviewBody": "Fast and good service, without deposit I rented a car, thank you!" },
+    { "@type": "Review", "author": { "@type": "Person", "name": "Workenson" }, "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }, "reviewBody": "Excellent company! The car was in perfect condition, everything clean and in good working order. The service was excellent — pickup, registration and return were quick and hassle-free." },
+    { "@type": "Review", "author": { "@type": "Person", "name": "Yulia N" }, "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }, "reviewBody": "We rented a 7-seater car for a reasonable price and were very satisfied. Highly recommend!" }
   ]
 }
 </script>
@@ -277,18 +283,41 @@
   </div>
 </section>
 
-<!-- ============ TESTIMONIAL ============ -->
-<section class="section section--dark">
+<!-- ============ REVIEWS ============ -->
+<section class="section section--dark" id="reviews">
   <div class="container">
     <div class="section__head reveal">
       <span class="kicker" data-i18n="rev.kicker">Reviews</span>
       <h2 data-i18n="rev.h">What our guests say</h2>
     </div>
-    <figure class="quote reveal">
-      <div class="quote__stars">★★★★★</div>
-      <blockquote data-i18n="rev.q">"Thank you for the lovely service! The car was great — really peppy, super trim, clean and with no odd smells. Special thanks for the water in the cabin and the fuel discount!"</blockquote>
-      <figcaption data-i18n="rev.by">— Guest who rented the Subaru Forester</figcaption>
-    </figure>
+    <div class="rating reveal">
+      <span class="rating__num">5.0</span>
+      <span class="rating__stars">★★★★★</span>
+      <a class="rating__count" href="https://maps.app.goo.gl/TAxKsxDAAAN66tCC9" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 11v2h5.5c-.2 1.4-1.6 4-5.5 4-3.3 0-6-2.7-6-6s2.7-6 6-6c1.9 0 3.1.8 3.9 1.5l1.9-1.8C16.5 3 14.5 2 12 2 6.9 2 2.8 6.1 2.8 11.2S6.9 20.4 12 20.4c5.6 0 9.4-4 9.4-9.6 0-.6-.1-1.1-.2-1.6H12z"/></svg>
+        <span data-i18n="rev.count">Based on 25 reviews on Google</span>
+      </a>
+    </div>
+    <div class="reviews">
+      <figure class="review reveal">
+        <div class="review__stars">★★★★★</div>
+        <blockquote data-i18n="rev.r1">"Fast and good service, without deposit I rented a car, thank you!"</blockquote>
+        <figcaption><b>Sam Alt</b><span data-i18n="rev.src">Google review</span></figcaption>
+      </figure>
+      <figure class="review reveal">
+        <div class="review__stars">★★★★★</div>
+        <blockquote data-i18n="rev.r2">"Excellent company! The car was in perfect condition, everything clean and in good working order. The service was excellent — pickup, registration and return were quick and hassle-free."</blockquote>
+        <figcaption><b>Workenson</b><span data-i18n="rev.src">Google review</span></figcaption>
+      </figure>
+      <figure class="review reveal">
+        <div class="review__stars">★★★★★</div>
+        <blockquote data-i18n="rev.r3">"We rented a 7-seater car for a reasonable price and were very satisfied. Highly recommend! 👍"</blockquote>
+        <figcaption><b>Юлия Н</b><span data-i18n="rev.src">Google review</span></figcaption>
+      </figure>
+    </div>
+    <div class="reviews__cta reveal">
+      <a class="btn btn--ghost" href="https://maps.app.goo.gl/TAxKsxDAAAN66tCC9" target="_blank" rel="noopener" data-i18n="rev.all">Read all reviews on Google</a>
+    </div>
   </div>
 </section>
 
@@ -453,6 +482,6 @@
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-<script defer src="script.js?v=17"></script>
+<script defer src="script.js?v=18"></script>
 </body>
 </html>
