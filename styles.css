@@ -422,3 +422,12 @@ html.lenis,html.lenis body{height:auto}
   .contact__info{padding-top:28px;margin-bottom:30px;gap:24px}
   .map{height:280px}
 }
+
+/* Mobile footer: brand full-width, then the 3 link columns side by side */
+@media(max-width:600px){
+  .footer{padding-top:44px}
+  .footer__inner{grid-template-columns:repeat(3,1fr);gap:26px 14px;padding-bottom:34px}
+  .footer__brand{grid-column:1 / -1}
+  .footer__col h5{margin-bottom:12px}
+  .footer__col a,.footer__col p{font-size:.82rem;margin-bottom:9px}
+}
