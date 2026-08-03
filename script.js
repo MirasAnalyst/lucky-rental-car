@@ -23,7 +23,7 @@ const P = (slug,n) => Array.from({length:n},(_,i)=>`images/car-${slug}-${i+1}.jp
 
 /* ---- Fleet data (bilingual). prices = [1-2d, 3-5d, 6-10d] per day in USD. ---- */
 const FLEET = [
-  { name:"Hyundai Sonata", photos:P('sonata',5), prices:[60,50,45],
+  { name:"Hyundai Sonata", photos:P('sonata',6), prices:[60,50,45],
     cls:{en:"Comfort Sedan",ru:"Комфорт-седан"},
     tag:{en:"Smooth, quiet 180 HP cruiser for the coast",ru:"Тихий и плавный седан 180 л.с."},
     specs:{en:["Automatic","180 HP","5 seats","Petrol"],ru:["Автомат","180 л.с.","5 мест","Бензин"]} },
@@ -35,7 +35,7 @@ const FLEET = [
     cls:{en:"AWD SUV",ru:"Полный привод"},
     tag:{en:"All-wheel drive for mountain roads",ru:"Полный привод для горных дорог"},
     specs:{en:["Automatic","5 seats","AWD","Petrol"],ru:["Автомат","5 мест","4WD","Бензин"]} },
-  { name:"Mitsubishi Outlander", photos:P('outlander',5), prices:[70,65,60],
+  { name:"Mitsubishi Outlander", photos:P('outlander',6), prices:[70,65,60],
     cls:{en:"Family SUV",ru:"Семейный кроссовер"},
     tag:{en:"Space for the whole family & luggage",ru:"Простор для всей семьи и багажа"},
     specs:{en:["Automatic","5 seats","Roomy","Petrol"],ru:["Автомат","5 мест","Просторный","Бензин"]} },
@@ -47,7 +47,7 @@ const FLEET = [
     cls:{en:"Compact SUV",ru:"Компакт-кроссовер"},
     tag:{en:"Agile, premium & easy to park",ru:"Манёвренный и премиальный"},
     specs:{en:["Automatic","5 seats","Sport","Petrol"],ru:["Автомат","5 мест","Спорт","Бензин"]} },
-  { name:"Mitsubishi Outlander Sport", photos:P('asx',5), prices:[60,50,40],
+  { name:"Mitsubishi Outlander Sport", photos:P('asx',6), prices:[60,50,40],
     cls:{en:"Compact SUV",ru:"Компакт-кроссовер"},
     tag:{en:"Nimble city SUV, easy on fuel",ru:"Юркий городской кроссовер"},
     specs:{en:["Automatic","5 seats","Compact","Petrol"],ru:["Автомат","5 мест","Компакт","Бензин"]} }
