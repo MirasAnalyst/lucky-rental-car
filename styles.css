@@ -208,9 +208,37 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:500;line-height:1.1
 .car__price span{font-size:.74rem;color:var(--muted-2);order:3;margin-top:1px}
 .car .btn--wa{background:transparent;color:var(--gold);border:1px solid var(--gold);font-weight:600;padding:.66em 1.3em}
 .car .btn--wa:hover{background:var(--gold);color:#1c160b;filter:none}
+.car__price--from{display:none}
 .fleet-note{text-align:center;color:var(--muted-2);font-size:.86rem;margin-top:52px;max-width:560px;margin-left:auto;margin-right:auto}
 @media(max-width:860px){.fleet-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.fleet-grid{grid-template-columns:1fr;max-width:400px;margin:0 auto}}
+/* Mobile: compact horizontal rows (thumbnail left, details right) so several cars show at once */
+@media(max-width:600px){
+  .fleet-grid{grid-template-columns:1fr;max-width:none;gap:12px}
+  .car{flex-direction:row;align-items:stretch;background:var(--panel);border:1px solid var(--line-soft);border-radius:14px;overflow:hidden}
+  .car:hover{transform:none}
+  .car:hover .car__media img{transform:none}
+  .car__media{width:40%;min-width:120px;max-width:150px;flex:none;aspect-ratio:auto;border-radius:0;margin-bottom:0}
+  .car__media img{height:100%}
+  .car__class{top:8px;left:8px;font-size:.58rem;padding:3px 7px}
+  .car__count{display:none}
+  .car__body{padding:10px 13px;justify-content:center}
+  .car__name{font-size:.98rem;margin-bottom:3px;line-height:1.2}
+  .car__tag{display:none}
+  .car__specs{gap:0;margin-bottom:0;flex-wrap:wrap}
+  .car__specs span{font-size:.62rem;padding:0;border:0;background:none;color:var(--muted)}
+  .car__specs span:not(:last-child)::after{content:"·";margin:0 5px;opacity:.5}
+  .car__tierwrap{display:none}
+  .car__foot{padding-top:9px;margin-top:9px;border-top:0}
+  .car__price{display:none}
+  .car__price--from{display:flex;flex-direction:column;line-height:1.08}
+  .car__price--from small{font-size:.54rem;color:var(--muted-2);font-weight:600;text-transform:uppercase;letter-spacing:.1em}
+  .car__price--from b{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:500;color:var(--text)}
+  .car__price--from span{font-size:.62rem;color:var(--muted-2)}
+  .car .btn--wa{padding:.48em 1em;font-size:.76rem}
+  /* lift the fleet up: tighter section head on mobile */
+  #fleet .section__head{margin-bottom:28px}
+  #fleet .section__head p{display:none}
+}
 
 /* ---------- Birthday promo ---------- */
 .promo{padding:clamp(72px,10vw,120px) 0;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}

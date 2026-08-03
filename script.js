@@ -313,6 +313,7 @@ function renderFleet(){
         </div>
         <div class="car__foot">
           <div class="car__price"><b class="car__amount">$${price}</b><span>${t('fleet.day')}</span></div>
+          <div class="car__price car__price--from"><small>${t('fleet.from')}</small><b>$${Math.min(...c.prices)}</b><span>${t('fleet.day')}</span></div>
           <a class="btn btn--wa car__book" href="${waBook(ci)}" target="_blank" rel="noopener" data-wired="1">${t('fleet.book')}</a>
         </div>
       </div>
