@@ -13,42 +13,41 @@ const CONTACT = {
 
 /* ---- Rental day tiers (price index maps to each car's `prices` array below) ---- */
 const DAY_TIERS = [
-  { key:"1-3",  en:"1–3 days",  ru:"1–3 дня"  },
-  { key:"4-7",  en:"4–7 days",  ru:"4–7 дней" },
-  { key:"8-30", en:"8–30 days", ru:"8–30 дней"},
-  { key:"30+",  en:"30+ days",  ru:"30+ дней" }
+  { key:"1-2",  en:"1–2 days",  ru:"1–2 дня"  },
+  { key:"3-5",  en:"3–5 days",  ru:"3–5 дней" },
+  { key:"6-10", en:"6–10 days", ru:"6–10 дней"}
 ];
 
 /* photos: [front/main, ...more angles]. Add/remove files in images/ and update the count. */
 const P = (slug,n) => Array.from({length:n},(_,i)=>`images/car-${slug}-${i+1}.jpg`);
 
-/* ---- Fleet data (bilingual). prices = [1-3d, 4-7d, 8-30d, 30+d] per day in USD. ---- */
+/* ---- Fleet data (bilingual). prices = [1-2d, 3-5d, 6-10d] per day in USD. ---- */
 const FLEET = [
-  { name:"Hyundai Sonata", photos:P('sonata',5), prices:[60,50,45,40],
+  { name:"Hyundai Sonata", photos:P('sonata',5), prices:[60,50,45],
     cls:{en:"Comfort Sedan",ru:"Комфорт-седан"},
     tag:{en:"Smooth, quiet 180 HP cruiser for the coast",ru:"Тихий и плавный седан 180 л.с."},
     specs:{en:["Automatic","180 HP","5 seats","Petrol"],ru:["Автомат","180 л.с.","5 мест","Бензин"]} },
-  { name:"Mercedes-Benz C-Class", photos:P('mercedes',5), prices:[95,80,70,65],
+  { name:"Mercedes-Benz C-Class", photos:P('mercedes',5), prices:[100,90,80],
     cls:{en:"Premium Coupe",ru:"Премиум-купе"},
     tag:{en:"Arrive in style along the promenade",ru:"Прибывайте с шиком по набережной"},
     specs:{en:["Automatic","4 seats","Leather","Premium"],ru:["Автомат","4 места","Кожа","Премиум"]} },
-  { name:"Subaru Forester Sport", photos:P('forester',5), prices:[75,65,55,50],
+  { name:"Subaru Forester Sport", photos:P('forester',5), prices:[65,60,55],
     cls:{en:"AWD SUV",ru:"Полный привод"},
     tag:{en:"All-wheel drive for mountain roads",ru:"Полный привод для горных дорог"},
     specs:{en:["Automatic","5 seats","AWD","Petrol"],ru:["Автомат","5 мест","4WD","Бензин"]} },
-  { name:"Mitsubishi Outlander", photos:P('outlander',5), prices:[65,55,50,45],
+  { name:"Mitsubishi Outlander", photos:P('outlander',5), prices:[70,65,60],
     cls:{en:"Family SUV",ru:"Семейный кроссовер"},
     tag:{en:"Space for the whole family & luggage",ru:"Простор для всей семьи и багажа"},
     specs:{en:["Automatic","5 seats","Roomy","Petrol"],ru:["Автомат","5 мест","Просторный","Бензин"]} },
-  { name:"Ford Escape Hybrid", photos:P('ford-escape',5), prices:[60,50,45,40],
-    cls:{en:"Economy Hybrid",ru:"Гибрид"},
-    tag:{en:"Low fuel costs, go further for less",ru:"Экономичный расход топлива"},
-    specs:{en:["Automatic","5 seats","Hybrid","Eco"],ru:["Автомат","5 мест","Гибрид","Эко"]} },
-  { name:"BMW X1", photos:P('bmw-x1',5), prices:[75,65,55,50],
+  { name:"Jeep Renegade", photos:P('jeep',5), prices:[55,50,40],
+    cls:{en:"Compact SUV",ru:"Компакт-кроссовер"},
+    tag:{en:"Rugged & fun for city and trails",ru:"Дерзкий кроссовер для города и трасс"},
+    specs:{en:["Automatic","5 seats","4x4","Petrol"],ru:["Автомат","5 мест","4x4","Бензин"]} },
+  { name:"BMW X1", photos:P('bmw-x1',5), prices:[75,70,60],
     cls:{en:"Compact SUV",ru:"Компакт-кроссовер"},
     tag:{en:"Agile, premium & easy to park",ru:"Манёвренный и премиальный"},
     specs:{en:["Automatic","5 seats","Sport","Petrol"],ru:["Автомат","5 мест","Спорт","Бензин"]} },
-  { name:"Mitsubishi ASX", photos:P('asx',5), prices:[50,45,40,35],
+  { name:"Mitsubishi Outlander Sport", photos:P('asx',5), prices:[60,50,40],
     cls:{en:"Compact SUV",ru:"Компакт-кроссовер"},
     tag:{en:"Nimble city SUV, easy on fuel",ru:"Юркий городской кроссовер"},
     specs:{en:["Automatic","5 seats","Compact","Petrol"],ru:["Автомат","5 мест","Компакт","Бензин"]} }
@@ -64,7 +63,7 @@ let lenisInstance = null;
 const I18N = {
   en: {
     "meta.title":"Car Rental in Batumi — No Deposit, 24/7 | Lucky Rental Car Georgia",
-    "meta.description":"Rent a car in Batumi, Georgia with Lucky Rental Car. No deposit, full CASCO insurance, free delivery to your hotel or the airport, and 24/7 support. Sedans & SUVs from $35/day — book on WhatsApp or Telegram.",
+    "meta.description":"Rent a car in Batumi, Georgia with Lucky Rental Car. No deposit, full CASCO insurance, free delivery to your hotel or the airport, and 24/7 support. Sedans & SUVs from $40/day — book on WhatsApp or Telegram.",
     "top.address":"Zhiuli Shartava St. 16, Batumi 6010",
     "top.hours":"Open 24/7 — Support around the clock",
     "top.pay":"We accept USD · EUR · GEL · USDT",
@@ -136,7 +135,7 @@ const I18N = {
   },
   ru: {
     "meta.title":"Аренда авто в Батуми — без залога, 24/7 | Lucky Rental Car",
-    "meta.description":"Аренда авто в Батуми, Грузия с Lucky Rental Car. Без залога, полное КАСКО, бесплатная доставка в отель или аэропорт и поддержка 24/7. Седаны и кроссоверы от $35/сутки — бронируйте в WhatsApp или Telegram.",
+    "meta.description":"Аренда авто в Батуми, Грузия с Lucky Rental Car. Без залога, полное КАСКО, бесплатная доставка в отель или аэропорт и поддержка 24/7. Седаны и кроссоверы от $40/сутки — бронируйте в WhatsApp или Telegram.",
     "top.address":"ул. Жиули Шартава 16, Батуми 6010",
     "top.hours":"Работаем 24/7 — Поддержка круглосуточно",
     "top.pay":"Принимаем USD · EUR · GEL · USDT",

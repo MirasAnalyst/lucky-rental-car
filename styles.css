@@ -193,7 +193,7 @@ h1,h2,h3,h4{font-family:'Playfair Display',serif;font-weight:500;line-height:1.1
 /* Day-tier selector */
 .car__tierwrap{margin-bottom:20px}
 .car__tierlabel{display:block;font-size:.64rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2);margin-bottom:9px}
-.car__tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.car__tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
 .car__tier{font-family:inherit;font-size:.76rem;font-weight:600;color:var(--muted);cursor:pointer;
   padding:8px 4px;border:1px solid var(--line);border-radius:9px;background:transparent;text-align:center;
   transition:border-color .25s,color .25s,background .25s;white-space:nowrap}
