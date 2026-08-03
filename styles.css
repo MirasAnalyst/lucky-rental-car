@@ -386,3 +386,39 @@ html.lenis,html.lenis body{height:auto}
 .lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
 .lenis.lenis-stopped{overflow:hidden}
 .lenis.lenis-smooth iframe{pointer-events:none}
+
+/* ============================================================
+   Mobile compactness — less scrolling + inline social logos
+   ============================================================ */
+@media(max-width:600px){
+  .section{padding:48px 0}
+  .section__head{margin-bottom:30px}
+  .section__head h2{font-size:1.85rem}
+  .section__head p{font-size:.92rem;margin-top:12px;line-height:1.55}
+  .kicker{margin-bottom:12px}
+  .hero__content{padding:92px 0 60px}
+  .hero__sub{margin:20px 0 26px;line-height:1.6}
+  .hero__badges{margin-top:30px}
+  .feat-grid{gap:26px}
+  .feat p,.dest p{font-size:.9rem}
+  .stats__inner{padding:38px 24px}
+  .promo{padding:42px 0}
+  .promo__body p{font-size:.92rem}
+  .terms-grid .term{padding:16px 0}
+  .term p{font-size:.9rem;line-height:1.5}
+  .travel-grid{gap:26px}
+  .faq__item summary{padding:18px 0;font-size:1rem}
+  .faq__a{padding-bottom:18px;font-size:.92rem}
+  .quote blockquote{font-size:1.2rem}
+  .about__body h2{font-size:1.7rem}
+  .about__list{gap:10px}
+  .about__body>p{line-height:1.6;font-size:.94rem}
+  /* Social: just brand logos in a line (no big square cards) */
+  .channels{display:flex;flex-wrap:wrap;justify-content:center;gap:22px;margin-bottom:30px}
+  .channel{flex:0 0 auto;width:auto;padding:0;background:none;border:0;border-radius:0}
+  .channel:hover{transform:none;background:none}
+  .channel b,.channel span{display:none}
+  .channel__ico{width:44px;height:44px;margin:0;opacity:1}
+  .contact__info{padding-top:28px;margin-bottom:30px;gap:24px}
+  .map{height:280px}
+}
