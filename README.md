@@ -33,6 +33,12 @@ Geologica + Onest fonts, Google-rated reviews, FAQ accordion. Section markup car
 styles; responsive columns come from CSS variables in `styles.css` (breakpoints 520/560/680/760/820/860/900/1040/1100 px).
 No animation libraries and no build step.
 
+## Motion
+No libraries; scrolling stays native. Everything is switched off by the OS "reduce motion" setting.
+- **Hero entrance, hover touches, menu / lightbox / FAQ easing** — the `motion` block at the end of `styles.css`.
+- **Scroll reveal** — `script.js` marks every block below the hero with `.rv` and adds `.in` when it scrolls into view. New sections are picked up automatically.
+- **Count-up numbers** — add `data-count` to an element whose text starts with a number (`15+`, `100%`).
+
 ## Language toggle (EN / RU)
 - Switch with the **EN / RU** buttons in the header. Choice is saved in the browser and new
   visitors get their browser language (falls back to English).

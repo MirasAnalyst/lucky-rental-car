@@ -303,6 +303,7 @@ const I = {
 };
 
 const SITE_BASE = 'https://luckyrent.ge/';
+const MOTION = !matchMedia('(prefers-reduced-motion: reduce)').matches;
 const tiers = CARS.map(() => 0);   /* selected rental-period tier per car */
 
 let LANG = new URLSearchParams(location.search).get('lang')
@@ -419,7 +420,9 @@ document.getElementById('fleetGrid').addEventListener('click', e => {
     tiers[ci] = j;
     card.querySelectorAll('.tb').forEach(x => x.classList.toggle('on', x === tb));
     const d = cardData(CARS[ci], ci);
-    card.querySelector('[data-cp]').textContent = d.price;
+    const cp = card.querySelector('[data-cp]');
+    cp.textContent = d.price;
+    if (MOTION) cp.animate([{ opacity:0, transform:'translateY(6px)' }, { opacity:1, transform:'none' }], { duration:250, easing:'ease-out' });
     card.querySelector('[data-cwa]').href = d.wa;
     card.querySelector('[data-ctg]').href = d.tg;
     return;
@@ -440,6 +443,7 @@ menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMen
 
 /* ---- FAQ accordion (one open at a time) ---- */
 const faqs = [...document.querySelectorAll('.fq')];
+document.querySelectorAll('.fqa').forEach(a => { const w = document.createElement('div'); w.className = 'fqw'; a.replaceWith(w); w.append(a); });   /* wrapper lets the answer animate its height */
 faqs.forEach(f => f.querySelector('button').addEventListener('click', () => {
   const open = !f.classList.contains('open');
   faqs.forEach(x => { x.classList.remove('open'); x.querySelector('button').setAttribute('aria-expanded', false); });
@@ -477,6 +481,42 @@ box.addEventListener('touchend', e => {
 }, { passive:true });
 
 applyLang();
+
+/* ---- Motion: scroll reveal + count-up numbers (CSS lives in the "motion" block of styles.css) ---- */
+if (MOTION && 'IntersectionObserver' in window){
+  const countUp = el => {
+    const m = el.textContent.match(/^(\d+)(.*)$/), t0 = performance.now();
+    if (!m) return;   /* not a number: leave the text as is */
+    const tick = now => {
+      const p = Math.min((now - t0) / 1400, 1);
+      el.textContent = Math.round(m[1] * (1 - (1 - p) ** 3)) + m[2];
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  /* The huge top margin makes everything above the fold line count as "in view",
+     so a jump (End key, anchor link, restored scroll) can never leave a block hidden. */
+  const io = new IntersectionObserver(entries => {
+    let n = 0;
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      if (e.boundingClientRect.bottom > 0) el.style.animationDelay = Math.min(n++, 5) * 80 + 'ms';   /* stagger what enters together */
+      el.classList.add('in');
+      el.querySelectorAll('[data-count]').forEach(countUp);
+      io.unobserve(el);
+    });
+  }, { rootMargin:'1000000px 0px -8% 0px' });
+  /* Targets: every block of every section below the hero. A bare wrapper (no background of its own)
+     with 3+ children is revealed child by child; a panel or card is revealed as a whole. */
+  document.querySelectorAll('section:not(#home) > div > *').forEach(b => {
+    (!b.style.background && b.children.length > 2 ? [...b.children] : [b]).forEach(el => {
+      if (el.getBoundingClientRect().top < innerHeight) return;   /* already on screen: leave it alone */
+      el.classList.add('rv');
+      io.observe(el);
+    });
+  });
+}
 
 /* ---- Analytics: one lead event per messenger click ---- */
 document.addEventListener('click', e => {

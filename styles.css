@@ -41,7 +41,7 @@ html{-webkit-text-size-adjust:100%}
 .tb.on{background:rgba(198,168,110,.18);color:#e4cf9f}
 .fq{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07)}
 .fq.open{background:rgba(255,255,255,.045);border-color:rgba(198,168,110,.3)}
-.fq:not(.open) .fqa{display:none}
+.fq:not(.open)>.fqa{display:none}
 .fqi{transform:rotate(0deg)}
 .fq.open .fqi{transform:rotate(45deg)}
 
@@ -74,3 +74,51 @@ html{-webkit-text-size-adjust:100%}
 .lbx-next{right:20px;top:50%;transform:translateY(-50%)}
 .lbx-count{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);padding:6px 14px;border-radius:100px;background:rgba(6,18,30,.66);color:#afbfce;font-size:.8125rem;font-weight:600;letter-spacing:.06em}
 @media (max-width:600px){.lbx-prev,.lbx-next{top:auto;bottom:16px;transform:none}.lbx-prev{left:16px}.lbx-next{right:16px}}
+
+/* ---- FAQ answers: collapsible height (script.js wraps each .fqa in .fqw) ---- */
+.fqw{display:grid;grid-template-rows:0fr}
+.fq.open .fqw{grid-template-rows:1fr}
+.fqw>.fqa{overflow:hidden;min-height:0}
+.fq:not(.open) .fqw>.fqa{padding-bottom:0!important;opacity:0;visibility:hidden}
+[data-count]{font-variant-numeric:tabular-nums}
+
+/* ---- motion: everything below is switched off by prefers-reduced-motion ---- */
+@media (prefers-reduced-motion:no-preference){
+  @keyframes rise{from{opacity:0;transform:translateY(22px)}}
+  @keyframes drop{from{opacity:0;transform:translateY(-8px)}}
+  @keyframes fade{from{opacity:0}}
+  @keyframes settle{from{transform:scale(1.07)}}
+  @keyframes draw{from{stroke-dasharray:120;stroke-dashoffset:120}to{stroke-dasharray:120;stroke-dashoffset:0}}
+
+  /* hero entrance: pure CSS, so it plays before script.js runs. The photo only scales (never hidden) to keep LCP fast */
+  #home img{animation:settle 2.4s cubic-bezier(.22,.61,.36,1) backwards}
+  #home>div:nth-child(3)>div>*,#home>div:last-child{animation:rise .9s cubic-bezier(.22,.61,.36,1) backwards}
+  #home>div:nth-child(3)>div>:nth-child(2){animation-delay:.08s}
+  #home>div:nth-child(3)>div>:nth-child(3){animation-delay:.16s}
+  #home>div:nth-child(3)>div>:nth-child(4){animation-delay:.24s}
+  #home>div:nth-child(3)>div>:nth-child(5){animation-delay:.32s}
+  #home>div:last-child{animation-delay:.45s}
+
+  /* scroll reveal: script.js puts .rv on blocks below the fold and adds .in when they scroll into view */
+  .rv{opacity:0}
+  .rv.in{opacity:1;animation:rise .8s cubic-bezier(.22,.61,.36,1) backwards}
+  /* outline icons draw themselves as their block appears */
+  .rv.in svg[style*="fill:none"]>*{animation:draw 1.2s .25s ease-out backwards}
+  #home>div:last-child svg>*{animation:draw 1.2s .8s ease-out backwards}
+
+  /* hover touches */
+  .h15 img{transition:transform .7s cubic-bezier(.22,.61,.36,1)}
+  .h15:hover img{transform:scale(1.04)}
+  .h6>span{transition:transform .4s cubic-bezier(.22,.61,.36,1)}
+  .h6:hover>span{transform:translateY(-3px) scale(1.06)}
+  .h3 svg,.h8 svg{transition:transform .3s}
+  .h3:hover svg{transform:translateX(4px)}
+  .h8:hover svg{transform:translate(2px,-2px)}
+
+  /* things that used to pop in: mobile menu, lightbox, FAQ answer */
+  #mobileMenu{animation:drop .3s cubic-bezier(.22,.61,.36,1)}
+  .lbx.open{animation:fade .25s ease}
+  .lbx.open img{animation:rise .35s cubic-bezier(.22,.61,.36,1)}
+  .fqw{transition:grid-template-rows .4s cubic-bezier(.22,.61,.36,1)}
+  .fqw>.fqa{transition:padding .4s cubic-bezier(.22,.61,.36,1),opacity .3s,visibility .4s}
+}
