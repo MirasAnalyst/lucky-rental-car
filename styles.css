@@ -59,7 +59,7 @@ html{-webkit-text-size-adjust:100%}
 .h11:hover{transform:translateY(-4px)!important;border-color:rgba(224,102,155,.5)!important}
 .h12:hover{transform:translateY(-4px)!important;border-color:rgba(76,127,224,.5)!important}
 .h13:hover{color:#c6a86e!important}
-.h14:hover{transform:scale(1.07)!important}
+.fab:hover{transform:scale(1.07);border-color:rgba(198,168,110,.55)!important;background:rgba(198,168,110,.14)!important}
 .h15:hover{transform:translateY(-4px)!important;border-color:rgba(198,168,110,.35)!important;box-shadow:0 30px 60px -30px rgba(0,0,0,.7)!important}
 .h16:hover{border-color:#29a9ea!important;background:rgba(41,169,234,.08)!important}
 
