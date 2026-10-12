@@ -477,3 +477,9 @@ box.addEventListener('touchend', e => {
 }, { passive:true });
 
 applyLang();
+
+/* ---- Analytics: one lead event per messenger click ---- */
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href*="wa.me"], a[href*="t.me"]');
+  if (a && window.gtag) gtag('event', 'generate_lead', { method: a.href.includes('wa.me') ? 'whatsapp' : 'telegram' });
+});
