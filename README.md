@@ -4,9 +4,9 @@ A modern, elegant, **bilingual (EN/RU)** and **SEO-optimised** one-page website 
 **Lucky Rental Car** — car rental in Batumi, Georgia.
 
 ## Files
-- `index.html` — page structure + SEO meta + structured data
-- `styles.css` — all styling (dark + gold luxury theme)
-- `script.js` — language toggle, translations, fleet cards, contact links, gallery lightbox, animations
+- `index.html` — page markup (inline styles from the v2 design) + SEO meta + structured data
+- `styles.css` — page base, per-breakpoint layout variables, hover rules, lightbox
+- `script.js` — language toggle + translations (`I`), fleet cards (`CARS`), FAQ accordion, menu, photo lightbox
 - `images/` — optimised web photos (from your originals) + `og-image.jpg` (social share)
 - `favicon.svg`, `robots.txt`, `sitemap.xml` — technical SEO assets
 
@@ -25,56 +25,34 @@ Fully responsive and tested at phone widths (390px iPhone, 360px Android):
 - Hamburger menu (desktop nav + "Book Now" collapse into it) with an animated open/close.
 - iOS Safari specifics handled: `-webkit-backdrop-filter` for the nav blur, `100svh` hero (with
   `100vh` fallback) so it fits under the dynamic address bar, `-webkit-tap-highlight-color` removed.
-- Smooth-scroll uses **native touch momentum** on phones (Lenis smooths the mouse wheel only) —
-  so scrolling feels normal on iOS/Android; magnetic buttons are disabled on touch devices.
+- Scrolling is native (no scroll libraries), so it feels normal on iOS/Android.
 
-## Animations (professional motion layer)
-Powered by **GSAP + ScrollTrigger + Lenis** (loaded from CDN in `index.html`; the site works
-fully without them). Handled in `initMotion()` in `script.js`:
-- Momentum **smooth scrolling** (Lenis)
-- Cinematic **hero** entrance (staggered) + subtle image parallax
-- **Staggered scroll reveals** with premium easing on every section
-- **Count-up** stats, **magnetic** primary buttons, **smart nav** (hides on scroll-down)
-- Fully disabled under `prefers-reduced-motion`; falls back to simple CSS reveals if the CDN is
-  blocked; a failsafe guarantees content is never left hidden.
+## Design
+The page follows the **v2 redesign** (Claude Design project “Lucky Rental Car — редизайн v2”): navy + gold,
+Geologica + Onest fonts, Google-rated reviews, FAQ accordion. Section markup carries the design's inline
+styles; responsive columns come from CSS variables in `styles.css` (breakpoints 520/560/680/760/820/860/900/1040/1100 px).
+No animation libraries and no build step.
 
 ## Language toggle (EN / RU)
 - Switch with the **EN / RU** buttons in the header. Choice is saved in the browser and new
   visitors get their browser language (falls back to English).
-- All text lives in the `I18N` object in `script.js` (`en` and `ru`). Edit translations there.
+- Texts live in the `I` object in `script.js` (`en` and `ru`); `index.html` carries the English text and a `data-i18n` key on each element.
 
-## ⚠️ Contact details — already set from your Instagram
-```js
-const CONTACT = {
-  whatsapp: "995555562877",     // +995 555 562 877
-  telegram: "995555562877",     // +995 555 562 877
-  instagram: "lucky_rentalcar",
-  facebook: "lucky_rentalcar"   // ← confirm your real Facebook page slug
-};
-```
-Every WhatsApp / Telegram / Instagram / Facebook button, the floating buttons and the "Book"
-buttons on each car update automatically from these values.
-👉 **Please confirm the Facebook page** — I used `facebook.com/lucky_rentalcar` as a guess.
+## Contact details
+WhatsApp / Telegram are set at the top of `script.js` (`WA`, `TG`); Instagram and Facebook links are written
+directly in `index.html`. The generic WhatsApp link text comes from `msg_generic` in `I`.
 
 ## Fleet & tiered prices
-In `script.js`, the `FLEET` array lists each car. Each car has a `prices` array mapping to the
-day tiers defined in `DAY_TIERS` — **[1–3 days, 4–7 days, 8–30 days, 30+ days]** (per day, USD).
-On each card the visitor picks a rental period and the price + WhatsApp booking message update live.
-
-⚠️ Only the **Hyundai Sonata** tiers ($60/$50/$45/$40) reflect your real Instagram pricing — the
-other cars use a sensible "shorter = pricier" estimate. **Please review every `prices` array** and
-adjust to your real rates. Example:
-```js
-{ name:"Mercedes-Benz C-Class", photos:P('mercedes',5), prices:[95,80,70,65], ... }  // 1-3d,4-7d,8-30d,30+d
-```
+In `script.js`, `CARS` lists each car: `[name, slug, photoCount, [price1–2d, price3–5d, price6–10d], class, tagline, specs]`.
+Each card lets the visitor pick the rental period; price and the WhatsApp/Telegram booking message update live.
 
 ## Per-car photo galleries
-Each car has a `photos` array — `P('sonata',5)` means `images/car-sonata-1.jpg … -5.jpg`.
-- `photos[0]` is the **main card image** (always a front shot).
+Each car has a photo count `n` and a `slug` — `images/car-<slug>-1.jpg … -<n>.jpg`.
+- `-1.jpg` is the **main card image** (always a front shot).
 - Clicking/tapping a car's photo opens a full-screen gallery you can navigate with the arrows,
   arrow keys, or **swipe** on mobile; it shows a `1 / 5` counter and locks background scroll.
 - To add/remove a car's photos: drop `car-<slug>-<n>.jpg` files in `images/` and change the count
-  in `P('<slug>', <n>)`. Same lightbox powers the bottom "Gallery" section.
+  in the car's entry in `CARS`. 
 
 ## SEO — what's included
 **Technical (developer):**
